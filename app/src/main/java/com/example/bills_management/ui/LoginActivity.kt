@@ -1,11 +1,11 @@
-package com.example.bills_management
+package com.example.bills_management.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.bills_management.databinding.ActivityLoginBinding
-import com.example.bills_management.databinding.ActivityMainBinding
+import com.example.bills_management.home
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
@@ -20,21 +20,25 @@ class LoginActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        binding.btButton3.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+        binding.btnLog.setOnClickListener {
+            val intent = Intent(this, home::class.java)
             startActivity(intent)
+
+//            binding.btnLog.setOnClickListener {
+//                Intent(this,home::class.java)
+//                startActivity(intent)
+//            }
         }
         validateForm()
         clearErrors()
     }
 
 
-    fun validateForm() {
+    private fun validateForm() {
         val username = binding.etName.text.toString()
-        val phoneNumber = binding.etPhone.text.toString()
+        val phoneNumber = binding.etName.text.toString()
         val email = binding.etEmail.text.toString()
-        val password=binding.etPassword.text.toString()
-        val confirmpassword=binding.etConfirm.text.toString()
+        val password=binding.etPass.text.toString()
 
         var error = false
         if (username.isBlank()) {
@@ -42,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
             error = true
         }
         if (phoneNumber.isBlank()) {
-            binding.tilPhone.error = "Phone Number is required"
+            binding.tilName.error = "Phone Number is required"
             error = true
         }
         if (email.isBlank()) {
@@ -50,15 +54,15 @@ class LoginActivity : AppCompatActivity() {
             error = true
         }
         if (password.isBlank()) {
-            binding.tilPassword.error = "Email  is required"
+            binding.tilPass.error = "Email  is required"
             error = true
         }
 
-
-        if (confirmpassword.isBlank()) {
-            binding.tilConfirm.error = "Email  is required"
-            error = true
-        }
+//
+//        if (confirmpassword.isBlank()) {
+//            binding.tilConfirm.error = "Email  is required"
+//            error = true
+//        }
 
         if (!error) {
             Toast.makeText(
@@ -71,10 +75,8 @@ class LoginActivity : AppCompatActivity() {
 
     fun clearErrors() {
         binding.tilName.error = null
-        binding.tilPhone.error = null
         binding.tilEmail.error = null
-        binding.tilPassword.error=null
-        binding.tilConfirm.error=null
+        binding.tilPass.error=null
     }
 }
 
